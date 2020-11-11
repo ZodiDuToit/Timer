@@ -1,8 +1,10 @@
-<Windowmanager>:
+WindowManager:
     MainScreen:
 
 
 <MainScreen>:
+
+    name: "main"
 
     hours: hours
     minutes: minutes
@@ -12,36 +14,55 @@
     minuteGrid: minuteGrid
     secondGrid: secondGrid
 
+    FloatLayout:
+        GridLayout:
 
-    GridLayout:
+            size_hint: 0.75, 0.8
+            pos_hint: {"x": 0.125, "y": 0.25}
 
-        size_hint: 0.75, 0.2
-        pos_hint: {"x": 0.125, "y": 0.75}
+            cols: 3
 
-        cols: 3
+            Label:
+                id: hours
+                text: "time"
 
-        Label:
-            id: hours
+            Label:
+                id: minutes  
+                text: "time"
 
-        Label:
-            id: minutes  
+            Label:
+                id: seconds 
+                text: "time"
 
-        Label:
-            id: seconds 
+        GridLayout:
 
-    GridLayout:
+            cols: 3
 
-        size_hint: 0.75, 0.6
-        pos_hint: {"x": 0, "y": 0.125}
+            size_hint: 0.75, 0.6
+            pos_hint: {"x": 0.15, "y": 0}
 
-        ScrollView:
-            GridLayout:
-                id: hourGrid
-        
-        ScrollView:
-            GridLayout:
-                id: minuteGrid
+            ScrollView:
+                GridLayout:
+                    id: hourGrid
 
-        ScrollView:
-            GridLayout:
-                id: secondGrid
+                    cols: 1
+
+            ScrollView:
+                GridLayout:
+                    id: minuteGrid
+
+                    cols: 1
+
+            ScrollView:
+                GridLayout:
+                    id: secondGrid
+
+                    cols: 1
+
+<GridLayout>:
+    size_hint_y: None
+
+    height: self.minimum_height  
+    row_default_height: 60
+
+    padding: 5

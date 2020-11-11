@@ -25,10 +25,14 @@ class MainScreen(Screen):
     def on_enter(self):
         Clock.schedule_once(self.addSelectbuttons)
 
-    def addSelectbuttons(self):
+
+
+    def addSelectbuttons(self, instance):
         self.addHourButtons()
         self.addMinuteButtons()
         self.addSecondButtons()
+
+
 
     def addHourButtons(self):
         self.addButtons(24, self.hourGrid, None)
@@ -42,10 +46,15 @@ class MainScreen(Screen):
         self.addButtons(60, self.secondGrid, None)
 
 
+    def buttonsOnRelease(self, instance):
+        print('button pressed')
+
+
     def addButtons(self, amount, insertInto, onRelease):
 
         for i in range(1, amount):
-            button = Button(text=str(i), onrelease=onRelease)
+            button = Button(text=str(i))
+            button.bind(on_press= self.buttonsOnRelease)
 
             insertInto.add_widget(button)
 
