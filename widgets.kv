@@ -1,0 +1,47 @@
+<Windowmanager>:
+    MainScreen:
+
+
+<MainScreen>:
+
+    hours: hours
+    minutes: minutes
+    seconds: seconds
+
+    hourGrid: hourGrid
+    minuteGrid: minuteGrid
+    secondGrid: secondGrid
+
+
+    GridLayout:
+
+        size_hint: 0.75, 0.2
+        pos_hint: {"x": 0.125, "y": 0.75}
+
+        cols: 3
+
+        Label:
+            id: hours
+
+        Label:
+            id: minutes  
+
+        Label:
+            id: seconds 
+
+    GridLayout:
+
+        size_hint: 0.75, 0.6
+        pos_hint: {"x": 0, "y": 0.125}
+
+        ScrollView:
+            GridLayout:
+                id: hourGrid
+        
+        ScrollView:
+            GridLayout:
+                id: minuteGrid
+
+        ScrollView:
+            GridLayout:
+                id: secondGrid
