@@ -15,6 +15,33 @@ WindowManager:
     secondGrid: secondGrid
 
     FloatLayout:
+
+        GridLayout:
+         
+            size_hint: 0.75, 0.2
+            pos_hint: {"x": 0.3, "y": 0.8}
+
+            cols: 3  
+            spacing: 20 
+
+            Button:
+                id: start
+                text: "start"
+
+                on_release: root.timerStart()
+
+            Button:
+                id: stop
+                text: "stop"
+
+                on_release: root.timerStop()
+
+            Button:
+                id: reset
+                text: "reset"
+
+                on_release: root.timerReset()
+
         GridLayout:
 
             size_hint: 0.75, 0.8
@@ -22,17 +49,17 @@ WindowManager:
 
             cols: 3
 
-            Label:
+            ColorLabel:
                 id: hours
-                text: "time"
+                text: "0"
 
-            Label:
+            ColorLabel:
                 id: minutes  
-                text: "time"
+                text: "0"
 
-            Label:
+            ColorLabel:
                 id: seconds 
-                text: "time"
+                text: "0"
 
         GridLayout:
 
@@ -42,22 +69,29 @@ WindowManager:
             pos_hint: {"x": 0.15, "y": 0}
 
             ScrollView:
-                GridLayout:
+                ScrollViewGridLayout:
                     id: hourGrid
 
                     cols: 1
 
             ScrollView:
-                GridLayout:
+                ScrollViewGridLayout:
                     id: minuteGrid
 
                     cols: 1
 
             ScrollView:
-                GridLayout:
+                ScrollViewGridLayout:
                     id: secondGrid
 
                     cols: 1
+
+
+<ScrollViewGridLayout>:
+    size_hint_y: None
+
+    height: self.minimum_height  
+    padding: 5
 
 <GridLayout>:
     size_hint_y: None
@@ -66,3 +100,38 @@ WindowManager:
     row_default_height: 60
 
     padding: 5
+
+
+<ColorLabel>:
+
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+
+    halign: "center"
+
+    canvas.before:
+        Color:
+            rgb: 0.30, 0.30, 0.30
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<BackgroundLabel>:
+    canvas.before:
+        Color:
+            rgb: 0.70, 0.30, 0.1
+
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+<ScrollViewButton>:
+    halign: "center"
+
+    size_hint_y: None
+    height: self.texture_size[1]
+    text_size: self.width, None
+
+            
