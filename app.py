@@ -68,7 +68,7 @@ class MainScreen(Screen):
 
     def addButtons(self, amount, insertInto, onPress):
 
-        for i in range(1, amount + 1):
+        for i in range(amount + 1):
             button = Button(text= str(i))
             button.bind(on_press= onPress)
 
