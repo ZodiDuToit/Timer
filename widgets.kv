@@ -16,10 +16,14 @@ WindowManager:
 
     FloatLayout:
 
+        BackgroundLabel:
+            size_hint: 0.8, 0.2
+            pos_hint: {"x": 0.125, "y": 0.775}
+
         GridLayout:
          
-            size_hint: 0.75, 0.2
-            pos_hint: {"x": 0.3, "y": 0.8}
+            size_hint: 0.75, 0.15
+            pos_hint: {"x": 0.15, "y": 0.8}
 
             cols: 3  
             spacing: 20 
@@ -42,10 +46,14 @@ WindowManager:
 
                 on_release: root.timerReset()
 
+        BackgroundLabel:
+            size_hint: 0.8, 0.25
+            pos_hint: {"x": 0.125, "y": 0.5}           
+
         GridLayout:
 
-            size_hint: 0.75, 0.8
-            pos_hint: {"x": 0.125, "y": 0.25}
+            size_hint: 0.75, 0.5
+            pos_hint: {"x": 0.15, "y": 0.225}
 
             cols: 3
 
@@ -61,12 +69,16 @@ WindowManager:
                 id: seconds 
                 text: "0"
 
+        BackgroundLabel:
+            size_hint: 0.8, 0.35
+            pos_hint: {"x": 0.125, "y": 0}
+
         GridLayout:
 
             cols: 3
 
-            size_hint: 0.75, 0.6
-            pos_hint: {"x": 0.15, "y": 0}
+            size_hint: 0.75, 0.3
+            pos_hint: {"x": 0.15, "y": 0.025}
 
             ScrollView:
                 ScrollViewGridLayout:
@@ -93,19 +105,13 @@ WindowManager:
     height: self.minimum_height  
     padding: 5
 
-<GridLayout>:
-    size_hint_y: None
-
-    height: self.minimum_height  
-    row_default_height: 60
-
-    padding: 5
+    row_default_height: 40
 
 
 <ColorLabel>:
 
     size_hint_y: None
-    height: self.texture_size[1]
+    font_size: self.height
     text_size: self.width, None
 
     halign: "center"
@@ -121,17 +127,12 @@ WindowManager:
 <BackgroundLabel>:
     canvas.before:
         Color:
-            rgb: 0.70, 0.30, 0.1
+            rgb: 0.45, 0.162, 0.166
 
         Rectangle:
             pos: self.pos
             size: self.size
-    
-<ScrollViewButton>:
-    halign: "center"
 
-    size_hint_y: None
-    height: self.texture_size[1]
-    text_size: self.width, None
+
 
             

@@ -24,6 +24,7 @@ class MainScreen(Screen):
     minuteGrid = ObjectProperty(None)
     secondGrid = ObjectProperty(None)
 
+    
 
 
     def on_enter(self):
@@ -32,6 +33,8 @@ class MainScreen(Screen):
     def runOnEnter(self, instance):
         self.addSelectbuttons()
 
+        self.timerRunning = False
+        self.runningTime = (0, 0, 0)
 
 
     def addSelectbuttons(self):
@@ -51,22 +54,25 @@ class MainScreen(Screen):
 
 
     def hourButtonOnRelease(self, instance):
-        self.hours.text = str(instance.text)
+        if self.timerRunning == False:
+            self.hours.text = str(instance.text)
 
     def minuteButtonOnRelease(self, instance):
-        self.minutes.text = str(instance.text)
+        if self.timerRunning == False:
+            self.minutes.text = str(instance.text)
 
     def secondButtonOnRelease(self, instance):
-        self.seconds.text = str(instance.text)
+        if self.timerRunning == False:
+            self.seconds.text = str(instance.text)
 
-    def addButtons(self, amount, insertInto, onRelease):
 
-        for i in range(1, amount):
-            button = ScrollViewButton(text= str(i))
-            button.bind(on_press= onRelease)
+    def addButtons(self, amount, insertInto, onPress):
+
+        for i in range(1, amount + 1):
+            button = Button(text= str(i))
+            button.bind(on_press= onPress)
 
             insertInto.add_widget(button)
-
 
 
     def getTimerDisplayText(self):
@@ -95,7 +101,7 @@ class MainScreen(Screen):
         return hours, minutes, seconds
 
 
-    def updateTimeLeftLabels(self, hours, minutes, seconds):
+    def updateTimerDisplay(self, hours, minutes, seconds):
         self.hours.text = str(hours)
         self.minutes.text = str(minutes)
         self.seconds.text = str(seconds)
@@ -103,23 +109,27 @@ class MainScreen(Screen):
 
     def timerTick(self, instance):
         hours, minutes, seconds = self.getTimerDisplayText()
-        self.updateTimeLeftLabels(*self.formatTimeLeft(hours, minutes, seconds - 1))
+        self.updateTimerDisplay(*self.formatTimeLeft(hours, minutes, seconds - 1))
 
-    def resetTimeLeftLabels(self):
-        self.updateTimeLeftLabels(0, 0, 0)
 
     def timerStop(self):
         Clock.unschedule(self.timerTick)
         Clock.unschedule(self.checkTimerStop)
 
+        self.timerRunning = False
+
     def timerStart(self):
         self.timerRun(self.convertToSeconds(*self.getTimerDisplayText()))
 
+        self.timerRunning = True
+        self.runningTime = self.getTimerDisplayText()
+
     def timerReset(self):
-        self.timerStop()
-        self.resetTimeLeftLabels()
+        if self.timerRunning:
+            self.timerStop()
 
-
+        self.updateTimerDisplay(*self.runningTime)
+        
 
     def timerRun(self, seconds):
         Clock.schedule_interval(self.timerTick, 1)
@@ -137,9 +147,6 @@ class BackgroundLabel(Label):
     pass
 
 class ColorLabel(Label):
-    pass
-
-class ScrollViewButton(Button):
     pass
 
 
